@@ -1,0 +1,21 @@
+{
+  "name": "vue-lazyload-images",
+  "version": "0.0.2",
+  "description": "vue image lazyload directive",
+  "main": "vue-lazyload-images.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ywkoh/vue-lazyload-images.git"
+  },
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "keywords": ["vue", "lazyload", "image", "vuejs"],
+  "author": "ywkoh",
+  "license": "MIT",
+  "bugs": "https://github.com/ywkoh/vue-lazyload-images/issues",
+  "homepage": "http://ywsoft.blogspot.com/"
+}
