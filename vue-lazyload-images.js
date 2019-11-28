@@ -1,50 +1,51 @@
-function setImageSrc(el) {
-  if (el.tagName && el.tagName == 'IMG') {
-    el.src = el.dataset.src;
+function setImageSrc (el) {
+  if (el.tagName && el.tagName === 'IMG') {
+    el.src = el.dataset.src
   } else {
-    el.style.backgroundImage = 'url(' + el.dataset.bg + ')';
+    el.style.backgroundImage = 'url(' + el.dataset.bg + ')'
   }
-  el.classList.add('lazyload_complete');
+  el.classList.add('lazyload_complete')
 }
 
-function reset(el, binding) {
+function reset (el, binding) {
   let lazyImages = [].slice.call(el.querySelectorAll('.lazy'))
-  let options = binding.value && binding.value.options;
+  let options = binding.value && binding.value.options
+  let lazyImageObserver = null
 
-  function callback(entries, observer) {
+  function callback (entries, observer) {
     entries.forEach(function (entry) {
       if (entry.isIntersecting) {
-        let lazyImage = entry.target;
-        setImageSrc(lazyImage);
-        lazyImageObserver.unobserve(lazyImage);
+        let lazyImage = entry.target
+        setImageSrc(lazyImage)
+        lazyImageObserver.unobserve(lazyImage)
       }
-    });
+    })
   }
-  if ("IntersectionObserver" in window) {
+  if ('IntersectionObserver' in window) {
     if (options && typeof options === 'object') {
-      var lazyImageObserver = new IntersectionObserver(callback, options);
+      lazyImageObserver = new IntersectionObserver(callback, options)
     } else {
-      var lazyImageObserver = new IntersectionObserver(callback);
+      lazyImageObserver = new IntersectionObserver(callback)
     }
     lazyImages.forEach(function (lazyImage, index) {
-      lazyImageObserver.observe(lazyImage);
-    });
+      lazyImageObserver.observe(lazyImage)
+    })
   } else {
     lazyImages.forEach(function (el) {
-      setImageSrc(el);
-    });
+      setImageSrc(el)
+    })
   }
 }
 
 export default {
-  bind(el, binding, vnode) {
-    let time = el.dataset.time || 100;
-    let resetTimeout = setTimeout(function () {
-      reset(el, binding);
-    }, time);
+  bind (el, binding, vnode) {
+    let time = el.dataset.time || 100
+    setTimeout(function () {
+      reset(el, binding)
+    }, time)
   },
-  update(el, binding, vnode){
-    setTimeout(function(){
+  update (el, binding, vnode) {
+    setTimeout(function () {
       reset(el, binding)
     }, 20)
   }
